@@ -3,7 +3,7 @@ About ducc0
 
 Home: https://gitlab.mpcdf.mpg.de/mtr/ducc
 
-Package license: GPL-2.0-only
+Package license: GPL-2.0-or-later
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/ducc0-feedstock/blob/master/LICENSE.txt)
 
