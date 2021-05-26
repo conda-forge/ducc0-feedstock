@@ -11,9 +11,9 @@ source:
   sha256: c578f009c69861b3a6a46c0bfc1848e0bd771bcad2ade026b8545f8d0539a30e
 
 build:
-  number: 0
+  number: 1
   skip: true  # [py2k]
-  script: {{ PYTHON }} -m pip install . -vv
+  script: DUCC0_OPTIMIZATION=portable {{ PYTHON }} -m pip install . -vv
 
 requirements:
   build:
