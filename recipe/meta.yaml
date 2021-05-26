@@ -1,5 +1,5 @@
 {% set name = "ducc0" %}
-{% set version = "0.10.1" %}
+{% set version = "0.11.0" %}
 
 
 package:
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/ducc0-{{ version }}.tar.gz
-  sha256: ea50c080ca3234871da465128f6411919a4fb43c21b07638f4ab63530666945b
+  sha256: c578f009c69861b3a6a46c0bfc1848e0bd771bcad2ade026b8545f8d0539a30e
 
 build:
   number: 0
@@ -38,7 +38,7 @@ test:
 about:
   home: https://gitlab.mpcdf.mpg.de/mtr/ducc
   summary: Distinctly useful code collection
-  license: GPL-2.0-only
+  license: GPL-2.0-or-later
   license_file: LICENSE
 
 extra:
