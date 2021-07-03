@@ -1,7 +1,6 @@
 {% set name = "ducc0" %}
 {% set version = "0.16.0" %}
 
-
 package:
   name: {{ name|lower }}
   version: {{ version }}
