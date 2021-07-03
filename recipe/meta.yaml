@@ -1,5 +1,5 @@
 {% set name = "ducc0" %}
-{% set version = "0.14.0" %}
+{% set version = "0.15.0" %}
 
 
 package:
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/ducc0-{{ version }}.tar.gz
-  sha256: a6a4c2632bff803115daf3fedeebef8dbb9b2c2f2eed2b59f78b9d8738c32822
+  sha256: 4f39c050e82a85bcb59b843905768c44e97b97ef530847bf8c9a5c766d9a29ce
 
 build:
   number: 0
