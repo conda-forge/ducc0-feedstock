@@ -11,7 +11,7 @@ source:
 
 build:
   number: 0
-  skip: true  # [py2k,py36]
+  skip: true  # [py<=36]
   script_env: DUCC0_OPTIMIZATION=portable
   script: {{ PYTHON }} -m pip install . -vv
 
