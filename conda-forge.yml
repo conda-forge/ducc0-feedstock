@@ -1,9 +1,11 @@
+build_platform:
+  linux_aarch64: linux_64
+  linux_ppc64le: linux_64
+  osx_arm64: osx_64
 conda_forge_output_validation: true
 provider:
   linux: default
-  osx: default
-  linux_ppc64le: default
   linux_aarch64: default
-build_platform:
-  osx_arm64: osx_64
+  linux_ppc64le: default
+  osx: default
 test_on_native_only: true
