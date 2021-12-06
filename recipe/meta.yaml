@@ -1,5 +1,5 @@
 {% set name = "ducc0" %}
-{% set version = "0.21.0" %}
+{% set version = "0.22.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,10 +7,10 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/ducc0-{{ version }}.tar.gz
-  sha256: 6b9d64e547edf231437c8356b203d6d3e2da2d23212b4576991c895788c8eef7
+  sha256: cd61f00f178d59271c048154849784f5f6d2a05e29bd0d8f1b1740ad7cf3c247
 
 build:
-  number: 1
+  number: 0
   skip: true  # [py<=36]
   script_env: DUCC0_OPTIMIZATION=portable
   script: {{ PYTHON }} -m pip install . -vv
