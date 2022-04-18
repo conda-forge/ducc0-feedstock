@@ -10,7 +10,7 @@ source:
   sha256: 4355836e5c4a38bbaab61973f06c797a36f370ef0f24fabeae4dce585f5b760f
 
 build:
-  number: 1
+  number: 0
   skip: true  # [py<=36]
   script_env: DUCC0_OPTIMIZATION=portable
   script: {{ PYTHON }} -m pip install . -vv
