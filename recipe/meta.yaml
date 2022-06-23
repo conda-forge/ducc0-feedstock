@@ -1,13 +1,13 @@
 {% set name = "ducc0" %}
-{% set version = "0.23.0" %}
+{% set version = "0.24.1" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/ducc0-{{ version }}.tar.gz
-  sha256: 33844bd0dfa4ce1a43810c70a21b9d6254f7d55c7f5a28126a587145c6fcbba1
+  url: https://gitlab.mpcdf.mpg.de/mtr/ducc/-/archive/ducc0_0_24_1_experimental/ducc-ducc0_0_24_1_experimental.tar.gz
+  sha256: dd100bb7ef7e0369e8323e58a28860656041f90ce48f055058e16f23a2ed6657
 
 build:
   number: 0
