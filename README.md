@@ -1,11 +1,11 @@
-About ducc0
-===========
+About ducc0-feedstock
+=====================
+
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/ducc0-feedstock/blob/main/LICENSE.txt)
 
 Home: https://gitlab.mpcdf.mpg.de/mtr/ducc
 
 Package license: GPL-2.0-or-later
-
-Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/ducc0-feedstock/blob/main/LICENSE.txt)
 
 Summary: Distinctly useful code collection
 
