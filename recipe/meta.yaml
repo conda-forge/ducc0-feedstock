@@ -26,6 +26,7 @@ requirements:
     - pip
     - pybind11
     - python
+    - setuptools
   run:
     - numpy >=1.17.0
     - python
