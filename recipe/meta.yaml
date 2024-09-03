@@ -10,7 +10,7 @@ source:
   sha256: ddd47d9bdf0d5487c9cbcf8bdaf3b0b00f04bfba77f09b9618ac6599d5a8035c
 
 build:
-  number: 0
+  number: 1
   skip: true  # [py<=36]
   script_env: DUCC0_OPTIMIZATION=portable
   script: {{ PYTHON }} -m pip install . -vv
@@ -21,11 +21,13 @@ requirements:
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
     - pybind11                               # [build_platform != target_platform]
     - {{ compiler('c') }}
+    - {{ stdlib("c") }}
     - {{ compiler('cxx') }}
   host:
     - pip
     - pybind11
     - python
+    - setuptools
   run:
     - numpy >=1.17.0
     - python
