@@ -26,10 +26,10 @@ python:
 - 3.9.* *_cpython
 target_platform:
 - linux-64
+ucc:
+- '1'
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
 - - c_stdlib_version
   - cdt_name
-- - python
-  - channel_sources
