@@ -31,6 +31,7 @@ requirements:
     - pybind11
     - nanobind
     - python
+    - make
     - cmake
     - scikit-build
     - scikit-build-core
