@@ -6,11 +6,11 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/ducc0-{{ version }}.tar.gz
+  url: https://files.pythonhosted.org/packages/source/{{ name[0] }}/{{ name }}/ducc0-{{ version }}.tar.gz
   sha256: bac084745bbdb243482a4aec3ecc857bdd46faec298c67e48bc0bb90350dbabd
 
 build:
-  number: 0
+  number: 1
   skip: true  # [py<=36]
   script_env: DUCC0_OPTIMIZATION=portable
   script: {{ PYTHON }} -m pip install . -vv
