@@ -24,7 +24,7 @@ build:
     # x86_64-microarch-level (its run_exports would make the test environment
     # unsolvable there). Pass the flag through ducc0's own hook instead, which
     # CMake appends after CXXFLAGS, and require the level at runtime below.
-    - DUCC0_CFLAGS=-march=x86-64-v4  # [unix and x86_64 and microarch_level == 4]
+    - DUCC0_CFLAGS=-march=x86-64-v4  # [linux and x86_64 and microarch_level == 4]
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
@@ -51,7 +51,7 @@ requirements:
   run:
     - numpy >=1.17.0
     - python
-    - _x86_64-microarch-level >=4  # [unix and x86_64 and microarch_level == 4]
+    - _x86_64-microarch-level >=4  # [linux and x86_64 and microarch_level == 4]
 
 {% if microarch_level|default(1)|int < 4 %}
 # Not for level 4: its __archspec requirement cannot be met on a CI runner that
