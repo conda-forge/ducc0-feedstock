@@ -1,5 +1,6 @@
 {% set name = "ducc0" %}
 {% set version = "0.41.0" %}
+{% set build = 1 %}
 
 package:
   name: {{ name|lower }}
@@ -10,13 +11,25 @@ source:
   sha256: bac084745bbdb243482a4aec3ecc857bdd46faec298c67e48bc0bb90350dbabd
 
 build:
-  number: 1
+  # ducc0 picks its SIMD width at compile time (std::experimental::simd's
+  # native_simd) and has no runtime dispatch, so a portable build is limited to
+  # SSE2 on x86_64. The microarch_level variants build x86-64-v3 (AVX2) and
+  # x86-64-v4 (AVX-512) as well; the higher level gets the higher build number
+  # so the solver prefers it wherever the CPU supports it.
+  number: {{ build + 100 * (microarch_level|default(1)|int - 1) }}
   skip: true  # [py<=36]
-  script_env: DUCC0_OPTIMIZATION=portable
+  script_env:
+    - DUCC0_OPTIMIZATION=portable
+    # CI runners are not guaranteed to support AVX-512, so level 4 cannot use
+    # x86_64-microarch-level (its run_exports would make the test environment
+    # unsolvable there). Pass the flag through ducc0's own hook instead, which
+    # CMake appends after CXXFLAGS, and require the level at runtime below.
+    - DUCC0_CFLAGS=-march=x86-64-v4  # [linux and x86_64 and microarch_level == 4]
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   build:
+    - x86_64-microarch-level =={{ microarch_level }}  # [unix and x86_64 and microarch_level < 4]
     - python                                 # [build_platform != target_platform]
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
     - pybind11                               # [build_platform != target_platform]
@@ -38,7 +51,11 @@ requirements:
   run:
     - numpy >=1.17.0
     - python
+    - _x86_64-microarch-level >=4  # [linux and x86_64 and microarch_level == 4]
 
+{% if microarch_level|default(1)|int < 4 %}
+# Not for level 4: its __archspec requirement cannot be met on a CI runner that
+# lacks AVX-512, and importing an AVX-512 build there could fault anyway.
 test:
   imports:
     - ducc0
@@ -46,6 +63,7 @@ test:
     - pip check
   requires:
     - pip
+{% endif %}
 
 about:
   home: https://gitlab.mpcdf.mpg.de/mtr/ducc
