@@ -1,6 +1,6 @@
 {% set name = "ducc0" %}
-{% set version = "0.41.0" %}
-{% set build = 1 %}
+{% set version = "0.42.0" %}
+{% set build = 0 %}
 
 package:
   name: {{ name|lower }}
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://files.pythonhosted.org/packages/source/{{ name[0] }}/{{ name }}/ducc0-{{ version }}.tar.gz
-  sha256: bac084745bbdb243482a4aec3ecc857bdd46faec298c67e48bc0bb90350dbabd
+  sha256: 4e11c59b53a43355b053aebb2a62ee16eebeed026575f7d216cf09d437ce52ef
 
 build:
   # ducc0 picks its SIMD width at compile time (std::experimental::simd's
