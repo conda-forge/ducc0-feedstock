@@ -1,0 +1,84 @@
+schema_version: 1
+
+context:
+  version: "0.42.0"
+  build_number: 1
+
+package:
+  name: ducc0
+  version: ${{ version }}
+
+source:
+  url: https://files.pythonhosted.org/packages/source/d/ducc0/ducc0-${{ version }}.tar.gz
+  sha256: 4e11c59b53a43355b053aebb2a62ee16eebeed026575f7d216cf09d437ce52ef
+
+build:
+  # Keep separate x86-64 microarchitecture builds instead of ducc0's optional
+  # Linux multiarch runtime dispatch. Higher build numbers prefer the fastest
+  # package compatible with the current CPU.
+  number: ${{ build_number + 100 * ((microarch_level | default(1) | int) - 1) }}
+  skip: match(python, "<3.8")
+  script:
+    content: ${{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
+    env:
+      DUCC0_OPTIMIZATION: portable
+      # CI runners may lack AVX-512, so Linux v4 uses ducc0's compiler hook
+      # and a runtime constraint instead of x86_64-microarch-level.
+      DUCC0_CFLAGS: ${{ "-march=x86-64-v4" if linux and x86_64 and match(microarch_level, "==4") else "" }}
+
+requirements:
+  build:
+    - if: (linux or osx) and x86_64 and match(microarch_level, "<4")
+      then:
+        - x86_64-microarch-level ==${{ microarch_level }}
+    - if: build_platform != host_platform
+      then:
+        - python
+        - cross-python_${{ host_platform }}
+        - pybind11 >=2.13.6
+    - nanobind >=2.12.0,<3
+    - make
+    - cmake >=3.30.3
+    - ${{ compiler('c') }}
+    - ${{ stdlib('c') }}
+    - ${{ compiler('cxx') }}
+  host:
+    - pip
+    - pybind11 >=2.13.6
+    - nanobind >=2.12.0,<3
+    - python
+    - numpy >=1.17.0
+    - scikit-build-core >=1.0,<1.1
+  run:
+    - numpy >=1.17.0
+    - python
+    - if: linux and x86_64 and match(microarch_level, "==4")
+      then:
+        - _x86_64-microarch-level >=4
+  # NumPy is declared as an upstream build-system requirement. Keep the
+  # existing runtime requirement (numpy >=1.17.0) without adding NumPy's
+  # solver-selected run export as an ABI constraint.
+  ignore_run_exports:
+    from_package:
+      - numpy
+
+tests:
+  - if: not (linux and x86_64 and match(microarch_level, "==4"))
+    then:
+      - python:
+          imports:
+            - ducc0
+          pip_check: true
+
+about:
+  homepage: https://gitlab.mpcdf.mpg.de/mtr/ducc
+  summary: Distinctly useful code collection
+  license: GPL-2.0-or-later
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - ickc
+    - MarkWieczorek
+    - mreineck
+    - mwyau
