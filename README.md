@@ -334,4 +334,5 @@ Feedstock Maintainers
 * [@MarkWieczorek](https://github.com/MarkWieczorek/)
 * [@ickc](https://github.com/ickc/)
 * [@mreineck](https://github.com/mreineck/)
+* [@mwyau](https://github.com/mwyau/)
 
